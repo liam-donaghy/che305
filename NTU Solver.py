@@ -7,22 +7,6 @@ xf = 0.13
 xd = 0.8
 
 
-def integrizzle(a, b, fx):
-    """
-    floats
-    """
-    n = 1000
-    ss = (b - a) / n
-    x = a
-    sum = 0
-    for _ in range(n):
-        num = fx(x) + fx(x+ss)
-        x += ss
-        sum += num*ss/2
-
-    return sum
-
-
 def f_star(x):
     """
     hoe
@@ -32,22 +16,57 @@ def f_star(x):
     return num/denom
 
 
-def ntustr(x):
+def ntustrintegrand(x):
     """
-    stuff
+
+    :param x: 
     """
     num = R + F/D
     denom = (R + 1)*f_star(x)-(R+(F/D))*x+(F/D)*xf-xd
     return num/denom
 
 
-def ntuenr(x):
+def ntuenrintegrand(x):
     """
     ccc 
     """
     num = R
     denom = (R + 1)*f_star(x)-R*x-xd
     return num/denom
+
+
+def ntustr(a, b):
+    """
+    stuff
+    """
+    if a == b:
+        return 0.0
+    n = 1000
+    ss = (b - a) / n
+    x = a
+    summ = 0.0
+    for _ in range(n):
+        num = ntustrintegrand(x) +ntustrintegrand(x + ss)
+        x += ss
+        summ += num * ss / 2
+    return summ
+
+
+def ntuenr(a, b):
+    """
+    stuff
+    """
+    if a == b:
+        return 0.0
+    n = 1000
+    ss = (b - a) / n
+    x = a
+    summ = 0.0
+    for _ in range(n):
+        num = ntuenrintegrand(x) + ntuenrintegrand(x + ss)
+        x += ss
+        summ += num * ss / 2
+    return summ
 
 
 def xbottoms():
@@ -60,13 +79,16 @@ def xbottoms():
 
 
 def solver():
-    tol = 0.001
+    tol = 0.5
     diff = 1.0
     x = xb
-    while diff > tol:
-        diff = integrizzle(xbottoms(), x, ntustr) - integrizzle(x, xd, ntuenr)
-        x += 0.001
-        print(diff, "\t", x)
+    x2 = x + ()
+    for x in range(xb, xd, 1000):
+        itema = ntustr(xbottoms(), x)
+        itemb = ntuenr(x, xd)
+        diff = itema - itemb
+        x +=
+        print(itema, itemb, "\t", x)
 
 
 
