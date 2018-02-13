@@ -77,25 +77,26 @@ def xbottoms():
     denom = (F/D) - 1
     return num/denom
 
-
+def diff(x):
+    itema = ntustr(xbottoms(), x)
+    itemb = ntuenr(x, xd)
+    diff = itema - itemb
+    return diff
+    
 def solver():
-    tol = 0.5
-    diff = 1.0
     x = xb
-    x2 = x + ()
-    for x in range(xb, xd, 1000):
-        itema = ntustr(xbottoms(), x)
-        itemb = ntuenr(x, xd)
-        diff = itema - itemb
-        x +=
-        print(itema, itemb, "\t", x)
-
-
-
+    x2 = x + 0.1
+    while abs(x2-x)>0.01:
+        x3 = x2 + (x2 - x)*diff(x2)/(diff(x2) - diff(x))
+        x = x2
+        x2 = x3
+        
+        print(x2)
+    return x2
 
 
 if __name__ == "__main__":
     xb = xbottoms()
-    print(xb)
-    solver()
+    out = solver()
+    print(diff(out))
 
